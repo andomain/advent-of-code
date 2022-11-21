@@ -1,3 +1,4 @@
-challenges/*
+challenges/**/*/README.md
+challenges/**/*/input.txt
 .env
 node_modules/
