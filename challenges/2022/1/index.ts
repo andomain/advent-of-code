@@ -1,8 +1,6 @@
-import { readFileSync } from 'fs';
+import { sumEl } from '../../../lib';
 import { getFileLines } from '../../../lib/io/readFile';
 import { sortDesc } from '../../../lib/sort';
-
-const sumEl = (sum: number, el: number) => sum += el
 
 const calories = getFileLines(`${__dirname}/input.txt`, '/\n\s*\n/')
   .map(lines => lines.split('\n').map(Number));
