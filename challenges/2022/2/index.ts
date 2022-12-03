@@ -1,5 +1,5 @@
 import { sumEl } from '../../../lib';
-import { getFileLines } from '../../../lib/io/readFile';
+import { getFileLines } from '../../../lib/io';
 
 type Round = [Opponent, Player];
 type ExpectedResult = [Opponent, Result];

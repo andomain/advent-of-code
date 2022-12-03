@@ -1,4 +1,4 @@
-import { getFileLines } from '../../../lib/io/readFile';
+import { getFileLines } from '../../../lib/io';
 
 type DescLookup = { result: number, prev: number | null };
 

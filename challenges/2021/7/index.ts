@@ -1,4 +1,4 @@
-import { getFileLines } from '../../../lib/io/readFile';
+import { getFileLines } from '../../../lib/io';
 
 const input = getFileLines(`${__dirname}/input.txt`)[0].split(',').map(Number);
 

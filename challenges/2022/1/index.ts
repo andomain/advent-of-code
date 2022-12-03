@@ -1,5 +1,5 @@
 import { sumEl } from '../../../lib';
-import { getFileLines } from '../../../lib/io/readFile';
+import { getFileLines } from '../../../lib/io';
 import { sortDesc } from '../../../lib/sort';
 
 const calories = getFileLines(`${__dirname}/input.txt`, '/\n\s*\n/')

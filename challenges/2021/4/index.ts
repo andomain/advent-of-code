@@ -1,5 +1,5 @@
 import { resourceLimits } from "worker_threads";
-import { getFileLines } from "../../../lib/io/readFile";
+import { getFileLines } from "../../../lib/io";
 import { Board } from "./Board";
 
 const inputLines = getFileLines(`${__dirname}/input.txt`);

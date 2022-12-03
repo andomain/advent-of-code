@@ -1,6 +1,6 @@
 import { deflateSync } from 'zlib';
 import { sumEl } from '../../../lib';
-import { getFileLines } from '../../../lib/io/readFile';
+import { getFileLines } from '../../../lib/io';
 import getInput from '../../../utils/getInput';
 
 const initTimers = getFileLines(`${__dirname}/input.txt`)[0]

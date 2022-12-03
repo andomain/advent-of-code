@@ -1,5 +1,5 @@
 import { binaryToDecimal, bitFlip } from "../../../lib/binary";
-import { getFileLines } from "../../../lib/io/readFile";
+import { getFileLines } from "../../../lib/io";
 
 type BitSelectFn = (inputs: string[], i: number) => number;
 

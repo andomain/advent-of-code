@@ -1,4 +1,4 @@
-import { getFileLines } from "../../../lib/io/readFile";
+import { getFileLines } from "../../../lib/io";
 import Vector from "../../../lib/Vector";
 
 
