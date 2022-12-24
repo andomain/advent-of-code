@@ -16,4 +16,8 @@ export default class Vector {
   unit(): Vector {
     return new Vector(Math.sign(this.x), Math.sign(this.y));
   }
+
+  toString(): string {
+    return `(${this.x},${this.y})`;
+  }
 }
