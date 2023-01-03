@@ -1,5 +1,5 @@
 export default class Vector {
-  constructor(public x = 0, public y = 0) { }
+  constructor (public x = 0, public y = 0) { }
 
   add(vec: Vector): Vector {
     return new Vector(this.x + vec.x, this.y + vec.y);
@@ -23,6 +23,10 @@ export default class Vector {
 
   unit(): Vector {
     return new Vector(Math.sign(this.x), Math.sign(this.y));
+  }
+
+  manhatten(vec: Vector): number {
+    return Math.abs(this.x - vec.x) + Math.abs(this.y - vec.y);
   }
 
   toString(): string {
