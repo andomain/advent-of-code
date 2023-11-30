@@ -1,23 +1,20 @@
-# Requirements
-Node, tested on Node 16
-npm
+# Advent Of Code TS Boilerplate
 
-## Setup
+A simple TS boilerplate for [Advent of Code](https://adventofcode.com/). Initially ported from [Tatu Pesonen
+](https://github.com/tatupesonen/aoc-typescript-starter) but simplified to be TS only and branched from there.
+
+## Installation
+
 ```
-npm install
+npm i
 ```
-You also need to create a `.env` file at project root with the contents of:
-`SESSION_COOKIE=your advent-of-code session cookie`
 
 ## Usage
-Let's say you want to create the project structure for 2020's day 1 challenge. To scaffold the project, get input & README, you would run:
-```bash
-npm start create 2020 1
-# for languages, add "ts", "typescript", "rs" or "rust" at the end of the file. Same goes for running.
-npm start create 2020 1 rust
-```
 
-To run the challenge, you would run:
-```
-npm start run 2020 1
+```js
+  // Run specific solutions for a certain specific year/day
+  npm run start <year> <day>
+  
+  // Run tests for a certain specific year/day
+  npm run test <year> <day>
 ```
