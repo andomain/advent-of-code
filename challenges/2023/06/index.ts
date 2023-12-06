@@ -24,15 +24,20 @@ const getRacesPart2: Parser = (input) => {
   return [{ time, record }];
 };
 
+/**
+ * Alternative solution suggested by Mark Goy
+ * The first winning time will be the same "distance" from the start as the last one is from the end
+ * So theoretically for a duration of n seconds were the first winning time is p ms
+ * the number of winning times is n - 2p
+ */
 const getWaysToWin = (race: Race) => {
-  let winningCount = 0;
-  for (let speed = 1; speed < race.time; speed += 1) {
-    if (speed * (race.time - speed) > race.record) {
-      winningCount += 1;
-    }
+  let holdTime = 0;
+
+  while (holdTime * (race.time - holdTime) <= race.record) {
+    holdTime += 1;
   }
 
-  return winningCount;
+  return race.time - 2 * holdTime + 1;
 };
 
 const multiplyReducer = (product: number, val: number) => product * val;
@@ -42,5 +47,9 @@ const solve = (fn: Parser) => (input: string) => fn(input).map(getWaysToWin).red
 export const solution1 = solve(getRacesPart1);
 export const solution2 = solve(getRacesPart2);
 
+console.time('Part 1');
 console.log(`Part 1: ${solution1(inputData)}`);
+console.timeEnd('Part 1');
+console.time('Part 2');
 console.log(`Part 2: ${solution2(inputData)}`);
+console.timeEnd('Part 2');
