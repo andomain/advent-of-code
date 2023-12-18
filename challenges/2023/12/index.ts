@@ -11,6 +11,8 @@ enum Spring {
   DAMAGED = '#',
 }
 
+type Cache = Map<string, number>;
+
 const cloneRecord = (src: Record, idx: number, replacement: Spring) => {
   const cloned: Record = { springs: [...src.springs], counts: [...src.counts] };
 
@@ -46,27 +48,48 @@ export const expandInput = (input: string, expansionFactor: number) => input.spl
   return { springs, counts } as Record;
 });
 
-export const getPossibleCombos = (record: Record): number => {
+const recordToCacheLabel = (record: Record) => `${record.springs.toString()}-${record.counts.toString()}`;
+
+export const getPossibleCombos = (record: Record, cache?: Cache): number => {
+  if (!cache) {
+    cache = new Map<string, number>();
+  }
+
+  if (cache.has(recordToCacheLabel(record))) {
+    return cache.get(recordToCacheLabel(record))!;
+  }
+
   if (record.springs.length === 0) {
-    return record.counts.length === 0 ? 1 : 0;
+    const result = record.counts.length === 0 ? 1 : 0;
+    cache.set(recordToCacheLabel(record), result);
+    return result;
   }
 
   if (record.counts.length === 0) {
-    return record.springs.includes(Spring.DAMAGED) ? 0 : 1;
+    const result = record.springs.includes(Spring.DAMAGED) ? 0 : 1;
+    cache.set(recordToCacheLabel(record), result);
+    return result;
   }
 
   if (record.springs[0] === Spring.FUNCTIONAL) {
-    return getPossibleCombos({ springs: record.springs.slice(1), counts: [...record.counts] });
+    const result = getPossibleCombos({ springs: record.springs.slice(1), counts: [...record.counts] }, cache);
+    cache.set(recordToCacheLabel(record), result);
+    return result;
   }
 
   if (record.springs[0] === Spring.UNKNOWN) {
-    const damagedResult = getPossibleCombos(cloneRecord(record, 0, Spring.DAMAGED));
-    const functionalResult = getPossibleCombos(cloneRecord(record, 0, Spring.FUNCTIONAL));
-    return damagedResult + functionalResult;
+    const damagedResult = getPossibleCombos(cloneRecord(record, 0, Spring.DAMAGED), cache);
+    const functionalResult = getPossibleCombos(cloneRecord(record, 0, Spring.FUNCTIONAL), cache);
+
+    const result = damagedResult + functionalResult;
+    cache.set(recordToCacheLabel(record), result);
+
+    return result;
   }
 
   // Case where springs start with #
   if (record.springs.length < record.counts[0]) {
+    cache.set(recordToCacheLabel(record), 0);
     return 0;
   }
   const group = record.springs.slice(0, record.counts[0]);
@@ -75,7 +98,10 @@ export const getPossibleCombos = (record: Record): number => {
     if (updatedSprings.length > 0) {
       updatedSprings[0] = Spring.FUNCTIONAL;
     }
-    return getPossibleCombos({ springs: updatedSprings, counts: record.counts.slice(1) });
+    const result = getPossibleCombos({ springs: updatedSprings, counts: record.counts.slice(1) }, cache);
+    cache.set(recordToCacheLabel(record), result);
+
+    return result;
   }
 
   return 0;
