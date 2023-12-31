@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs';
+import { reduceSumFn } from '../../../reducers';
 
 type Record = {
   springs: Spring[],
@@ -107,11 +108,8 @@ export const getPossibleCombos = (record: Record, cache?: Cache): number => {
   return 0;
 };
 
-export const solution1 = (input: string) => expandInput(input, 1)
-  .reduce((sum, record) => sum + getPossibleCombos(record), 0);
-
-export const solution2 = (input: string) => expandInput(input, 5)
-  .reduce((sum, record) => sum + getPossibleCombos(record), 0);
+export const solution1 = (input: string) => expandInput(input, 1).reduce(reduceSumFn(getPossibleCombos), 0);
+export const solution2 = (input: string) => expandInput(input, 5).reduce(reduceSumFn(getPossibleCombos), 0);
 
 console.time('Part 1');
 console.log(`Part 1: ${solution1(inputData)}`);

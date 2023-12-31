@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs';
+import { reduceSum } from '../../../reducers';
 
 const inputData = readFileSync(`${__dirname}/input.txt`).toString();
 
@@ -35,7 +36,7 @@ const convertToNumber = (...inputStrs: (string | number)[]) => Number(inputStrs.
 const processLines = (lines: string, fn: (line: string) => number) => lines
   .split('\n')
   .map(fn)
-  .reduce((sum, val) => sum + val, 0);
+  .reduce(reduceSum, 0);
 
 // Processers
 

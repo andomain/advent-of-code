@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs';
+import { reduceSumFn } from '../../../reducers';
 
 const inputData = readFileSync(`${__dirname}/input.txt`).toString();
 
@@ -34,12 +35,11 @@ const getNextValue = (line: string) => {
 };
 
 // The last value of the history is the sum of all the diffs
-export const solution1 = (input: string) => input.split('\n')
-  .reduce((sum, line) => sum + getNextValue(line), 0);
+export const solution1 = (input: string) => input.split('\n').reduce(reduceSumFn(getNextValue), 0);
 
 // Reverse each line and solution 2 matches solution 1
 export const solution2 = (input: string) => input.split('\n').map((a) => a.split(' ').reverse().join(' '))
-  .reduce((sum, line) => sum + getNextValue(line), 0);
+  .reduce(reduceSumFn(getNextValue), 0);
 
 console.time('Part 1');
 console.log(`Part 1: ${solution1(inputData)}`);
