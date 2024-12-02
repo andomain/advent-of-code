@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "ts-node index.ts",
-    "lint": "eslint challenges/**/*.ts"
+    "lint": "eslint challenges/**/*.ts",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +24,9 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jest": "^28.9.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "husky": "^8.0.0",
     "jest": "^29.7.0",
+    "lint-staged": "^15.2.10",
     "nodemon": "^3.1.7",
     "prettier": "^3.4.1",
     "ts-jest": "^29.2.5",
