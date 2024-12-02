@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 
 const inputData = readFileSync(`${__dirname}/input.txt`).toString();
 
-type Race = { time: number, record: number };
+type Race = { time: number; record: number };
 
 type Parser = (input: string) => Race[];
 

@@ -4,36 +4,40 @@ const inputData = readFileSync(`${__dirname}/input.txt`).toString();
 
 type GridItem = {
   value: string;
-  row: number,
-  col: number,
-  length: number,
-  touches: GridItem[],
+  row: number;
+  col: number;
+  length: number;
+  touches: GridItem[];
 };
 
-type GridLookup = { numbers: GridItem[], symbols: GridItem[] };
+type GridLookup = { numbers: GridItem[]; symbols: GridItem[] };
 
-const touches = (source: GridItem, dest: GridItem) => (
-  dest.row >= source.row - 1
-  && dest.row <= source.row + 1
-  && dest.col >= source.col - 1
-  && dest.col <= source.col + source.length
-);
+const touches = (source: GridItem, dest: GridItem) =>
+  dest.row >= source.row - 1 &&
+  dest.row <= source.row + 1 &&
+  dest.col >= source.col - 1 &&
+  dest.col <= source.col + source.length;
 
 const testNumber = /\d+/g;
 const testSymbol = /[^\w.]/g;
 
-const toGridItems = (input: string, test: RegExp, row: number) => [...input.matchAll(test)].map<GridItem>((match) => ({
-  value: match[0],
-  row,
-  col: match.index!,
-  length: match[0].length,
-  touches: [],
-}));
+const toGridItems = (input: string, test: RegExp, row: number) =>
+  [...input.matchAll(test)].map<GridItem>((match) => ({
+    value: match[0],
+    row,
+    col: match.index,
+    length: match[0].length,
+    touches: [],
+  }));
 
-const parseInput = (input: string) => input.split('\n').reduce<GridLookup>((lookup, row, rowIdx) => ({
-  numbers: [...lookup.numbers, ...toGridItems(row, testNumber, rowIdx)],
-  symbols: [...lookup.symbols, ...toGridItems(row, testSymbol, rowIdx)],
-}), { numbers: [], symbols: [] });
+const parseInput = (input: string) =>
+  input.split('\n').reduce<GridLookup>(
+    (lookup, row, rowIdx) => ({
+      numbers: [...lookup.numbers, ...toGridItems(row, testNumber, rowIdx)],
+      symbols: [...lookup.symbols, ...toGridItems(row, testSymbol, rowIdx)],
+    }),
+    { numbers: [], symbols: [] },
+  );
 
 export const solution1 = (input: string) => {
   const { numbers, symbols } = parseInput(input);

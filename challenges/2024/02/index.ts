@@ -5,11 +5,12 @@ type Row = Array<number>;
 const MAX_DIFF = 3;
 const MIN_DIFF = 1;
 
-const readInput = (filePath: string) => readFileSync(filePath)
-  .toString()
-  .trim()
-  .split('\n')
-  .map((row) => row.split(/\s+/g).map(Number));
+const readInput = (filePath: string) =>
+  readFileSync(filePath)
+    .toString()
+    .trim()
+    .split('\n')
+    .map((row) => row.split(/\s+/g).map(Number));
 
 const isValidDiff = (diff: number, ascending: boolean) => {
   if (ascending) {
@@ -28,9 +29,10 @@ const solution1 = (row: Row) => {
   });
 };
 
-const solution2 = (row: Row) => new Array(row.length).fill(null).some((_, removeIdx) => (
-  solution1([...row.slice(0, removeIdx), ...row.slice(removeIdx + 1)])
-));
+const solution2 = (row: Row) =>
+  new Array(row.length)
+    .fill(null)
+    .some((_, removeIdx) => solution1([...row.slice(0, removeIdx), ...row.slice(removeIdx + 1)]));
 
 const rows = readInput(`${__dirname}/input.txt`);
 

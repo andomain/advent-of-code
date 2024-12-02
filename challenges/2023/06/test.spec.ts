@@ -2,13 +2,9 @@ import { solution1, solution2 } from '.';
 
 type Test = [string, number];
 
-const part1Tests: Test[] = [
-  ['Time:      7  15   30\nDistance:  9  40  200', 288],
-];
+const part1Tests: Test[] = [['Time:      7  15   30\nDistance:  9  40  200', 288]];
 
-const part2Tests: Test[] = [
-  ['Time:      7  15   30\nDistance:  9  40  200', 71503],
-];
+const part2Tests: Test[] = [['Time:      7  15   30\nDistance:  9  40  200', 71503]];
 
 describe('2023 Day 6', () => {
   describe('Part 1', () => {

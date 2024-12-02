@@ -38,8 +38,11 @@ const getNextValue = (line: string) => {
 export const solution1 = (input: string) => input.split('\n').reduce(reduceSumFn(getNextValue), 0);
 
 // Reverse each line and solution 2 matches solution 1
-export const solution2 = (input: string) => input.split('\n').map((a) => a.split(' ').reverse().join(' '))
-  .reduce(reduceSumFn(getNextValue), 0);
+export const solution2 = (input: string) =>
+  input
+    .split('\n')
+    .map((a) => a.split(' ').reverse().join(' '))
+    .reduce(reduceSumFn(getNextValue), 0);
 
 console.time('Part 1');
 console.log(`Part 1: ${solution1(inputData)}`);

@@ -27,11 +27,12 @@ const parseGame = (game: string): Game => {
   };
 };
 
-export const solution1 = (input: string) => input.split('\n').reduce((sum, game) => {
-  const { score } = parseGame(game);
+export const solution1 = (input: string) =>
+  input.split('\n').reduce((sum, game) => {
+    const { score } = parseGame(game);
 
-  return sum + score;
-}, 0);
+    return sum + score;
+  }, 0);
 
 export const solution2 = (input: string) => {
   const cardLookup = input.split('\n').map(parseGame);

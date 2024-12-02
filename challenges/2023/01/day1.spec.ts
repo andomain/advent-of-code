@@ -1,9 +1,4 @@
-import {
-  processPart1,
-  processPart2,
-  solution1,
-  solution2,
-} from '.';
+import { processPart1, processPart2, solution1, solution2 } from '.';
 
 const testInput1 = '1abc2\npqr3stu8vwx\na1b2c3d4e5f\ntreb7uchet';
 const testInput2 = 'two1nine\neightwothree\nabcone2threexyz\nxtwone3four\n4nineeightseven2\nzoneight234\n7pqrstsixteen';

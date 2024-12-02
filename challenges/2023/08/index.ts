@@ -3,9 +3,9 @@ import { readFileSync } from 'fs';
 const inputData = readFileSync(`${__dirname}/input.txt`).toString();
 
 type Node = {
-  id: string,
-  left: string,
-  right: string,
+  id: string;
+  left: string;
+  right: string;
 };
 type NodeMap = { [key: string]: Node };
 
@@ -23,28 +23,23 @@ const findlcm = (arr: number[]) => {
   // ans contains LCM of arr[0], ..arr[i]
   // after i'th iteration,
   for (let i = 1; i < arr.length; i += 1) {
-    ans = (((arr[i] * ans))
-      / (gcd(arr[i], ans)));
+    ans = (arr[i] * ans) / gcd(arr[i], ans);
   }
 
   return ans;
 };
 
-const followPaths = (
-  startNodes: Node[],
-  nodes: NodeMap,
-  directions: string[],
-  endTest: (node: Node) => boolean,
-) => startNodes.map((node) => {
-  let current = { ...node };
-  let steps = 0;
+const followPaths = (startNodes: Node[], nodes: NodeMap, directions: string[], endTest: (node: Node) => boolean) =>
+  startNodes.map((node) => {
+    let current = { ...node };
+    let steps = 0;
 
-  while (!endTest(current)) {
-    current = directions[steps % directions.length] === 'R' ? nodes[current.right] : nodes[current.left];
-    steps += 1;
-  }
-  return steps;
-});
+    while (!endTest(current)) {
+      current = directions[steps % directions.length] === 'R' ? nodes[current.right] : nodes[current.left];
+      steps += 1;
+    }
+    return steps;
+  });
 
 const parseInput = (input: string) => {
   const [directionsInput, labels] = input.split('\n\n');

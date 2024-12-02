@@ -21,15 +21,18 @@ const expandGrid = (input: string[][]) => {
   return { rows, cols };
 };
 
-const findGalaxies = (input: string[][]) => input.reduce<{ x: number, y: number }[]>((result, row, rowIdx) => {
-  result.push(...row.reduce<{ x: number, y: number }[]>((rowResult, col, colIdx) => {
-    if (col === '#') {
-      rowResult.push({ x: colIdx, y: rowIdx });
-    }
-    return rowResult;
-  }, []));
-  return result;
-}, []);
+const findGalaxies = (input: string[][]) =>
+  input.reduce<{ x: number; y: number }[]>((result, row, rowIdx) => {
+    result.push(
+      ...row.reduce<{ x: number; y: number }[]>((rowResult, col, colIdx) => {
+        if (col === '#') {
+          rowResult.push({ x: colIdx, y: rowIdx });
+        }
+        return rowResult;
+      }, []),
+    );
+    return result;
+  }, []);
 
 const sumDistances = (grid: string[][], expansionRate: number) => {
   const { rows, cols } = expandGrid(grid);
@@ -64,7 +67,7 @@ const sumDistances = (grid: string[][], expansionRate: number) => {
           verticalDistance += 1;
         }
       }
-      sum += (horizontalDistance + verticalDistance);
+      sum += horizontalDistance + verticalDistance;
     }
   }
   return sum;

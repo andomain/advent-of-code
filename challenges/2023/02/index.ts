@@ -32,11 +32,8 @@ const toGame = (game: string): Game => {
   return { id: +id, rounds };
 };
 
-const roundValid = (round: Round, max: Round) => (
-  round.red <= max.red
-  && round.green <= max.green
-  && round.blue <= max.blue
-);
+const roundValid = (round: Round, max: Round) =>
+  round.red <= max.red && round.green <= max.green && round.blue <= max.blue;
 
 const getValidId = (game: Game) => {
   const valid = !game.rounds.some((round) => !roundValid(round, { red: 12, green: 13, blue: 14 }));
@@ -44,22 +41,21 @@ const getValidId = (game: Game) => {
 };
 
 const getMinBalls = (game: Game) => {
-  const minBalls = game.rounds.reduce((max, round) => ({
-    red: Math.max(max.red, round.red),
-    green: Math.max(max.green, round.green),
-    blue: Math.max(max.blue, round.blue),
-  }), { red: 0, green: 0, blue: 0 });
+  const minBalls = game.rounds.reduce(
+    (max, round) => ({
+      red: Math.max(max.red, round.red),
+      green: Math.max(max.green, round.green),
+      blue: Math.max(max.blue, round.blue),
+    }),
+    { red: 0, green: 0, blue: 0 },
+  );
 
   return minBalls.red * minBalls.green * minBalls.blue;
 };
 
-export const solution1 = (input: string) => input.split('\n')
-  .map(toGame)
-  .reduce(reduceSumFn(getValidId), 0);
+export const solution1 = (input: string) => input.split('\n').map(toGame).reduce(reduceSumFn(getValidId), 0);
 
-export const solution2 = (input: string) => input.split('\n')
-  .map(toGame)
-  .reduce(reduceSumFn(getMinBalls), 0);
+export const solution2 = (input: string) => input.split('\n').map(toGame).reduce(reduceSumFn(getMinBalls), 0);
 
 console.log(`Part 1: ${solution1(inputData)}`);
 console.log(`Part 2: ${solution2(inputData)}`);

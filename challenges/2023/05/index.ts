@@ -27,7 +27,7 @@ const parseInput = (input: string) => {
   return { seeds, maps };
 };
 
-const inRange = (val: number, map: Mapper) => ((val >= map.source) && (val < map.source + map.length));
+const inRange = (val: number, map: Mapper) => val >= map.source && val < map.source + map.length;
 
 const applyMapping = (val: number, map: Mapper) => {
   const offset = val - map.source;
@@ -38,7 +38,6 @@ const mapSeed = (input: number, maps: SeedMap[]) => {
   let current = input;
 
   for (const map of maps) {
-    // eslint-disable-next-line @typescript-eslint/no-loop-func
     const currentMapping = map.find((m) => inRange(current, m))!;
     current = currentMapping ? applyMapping(current, currentMapping) : current;
   }

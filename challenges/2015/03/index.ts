@@ -1,7 +1,6 @@
-/* eslint-disable no-underscore-dangle */
 import { readFileSync } from 'fs';
 
-type Position = { x: number, y: number };
+type Position = { x: number; y: number };
 
 const inputData = readFileSync(`${__dirname}/input.txt`).toString();
 
@@ -19,15 +18,20 @@ class Movable {
 
   step(direction: string) {
     switch (direction) {
-      case '^': this.position = { ...this.position, y: this.position.y + 1 };
+      case '^':
+        this.position = { ...this.position, y: this.position.y + 1 };
         break;
-      case 'v': this.position = { ...this.position, y: this.position.y - 1 };
+      case 'v':
+        this.position = { ...this.position, y: this.position.y - 1 };
         break;
-      case '>': this.position = { ...this.position, x: this.position.x + 1 };
+      case '>':
+        this.position = { ...this.position, x: this.position.x + 1 };
         break;
-      case '<': this.position = { ...this.position, x: this.position.x - 1 };
+      case '<':
+        this.position = { ...this.position, x: this.position.x - 1 };
         break;
-      default: throw new Error(`Unknown step direction ${direction}`);
+      default:
+        throw new Error(`Unknown step direction ${direction}`);
     }
 
     this._logged.add(`(${this.position.x},${this.position.y})`);

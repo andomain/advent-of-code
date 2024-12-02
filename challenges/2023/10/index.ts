@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import { readFileSync } from 'fs';
 import Vector from '../../../lib/Vector';
 
@@ -37,7 +36,7 @@ const ValidDirections: { [key in Pipe]: Directions[] } = {
   S: [Directions.North, Directions.East, Directions.West, Directions.South],
 };
 
-const parseInput = (input: string): { start: Vector, grid: Pipe[][] } => {
+const parseInput = (input: string): { start: Vector; grid: Pipe[][] } => {
   let startPos = { x: -1, y: -1 };
 
   const grid = input.split('\n').map<Pipe[]>((row, y) => {
@@ -68,7 +67,6 @@ const getNetwork = (input: string) => {
     let nextGridCell: Vector;
     let nextPipe: Pipe;
 
-    // eslint-disable-next-line @typescript-eslint/no-loop-func
     nextDirections.find((dir) => {
       nextGridCell = currentPos.add(DirectionVector[dir]);
       nextPipe = getVal(grid, nextGridCell);
@@ -97,7 +95,7 @@ const getShoestringArea = (points: Vector[]) => {
   for (let i = 0; i < points.length; i += 1) {
     const a = points[i];
     const b = points[(i + 1) % points.length];
-    sum += (a.x * b.y) - (a.y * b.x);
+    sum += a.x * b.y - a.y * b.x;
   }
   return Math.abs(sum) / 2;
 };

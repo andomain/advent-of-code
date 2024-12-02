@@ -5,12 +5,15 @@ import { reduceSumFn } from '../../../reducers';
 const inputData = readFileSync(`${__dirname}/input.txt`).toString();
 
 type Grid = string[];
-type GridPoint = { row: number, col: number };
+type GridPoint = { row: number; col: number };
 type ScoreGridFn = (grid: Grid) => number;
 
 const getHorizontalReflectionRow = (grid: Grid, includeRow?: number) => {
   for (let i = 0; i < grid.length - 1; i += 1) {
-    const upper = grid.slice(0, i + 1).reverse().join('');
+    const upper = grid
+      .slice(0, i + 1)
+      .reverse()
+      .join('');
     const lower = grid.slice(i + 1).join('');
 
     const shortest = Math.min(upper.length, lower.length);
@@ -41,16 +44,17 @@ const scoreGrid = (grid: Grid, smudged?: GridPoint) => {
   return getHorizontalReflectionRow(rotated, smudged?.col);
 };
 
-const smudgeGrid = (grid: Grid, smudgePoint: GridPoint): Grid => grid.map((row, rowIdx) => {
-  if (rowIdx !== smudgePoint.row) {
-    return row.slice();
-  }
+const smudgeGrid = (grid: Grid, smudgePoint: GridPoint): Grid =>
+  grid.map((row, rowIdx) => {
+    if (rowIdx !== smudgePoint.row) {
+      return row.slice();
+    }
 
-  const parts = row.split('');
-  parts[smudgePoint.col] = parts[smudgePoint.col] === '#' ? '.' : '#';
+    const parts = row.split('');
+    parts[smudgePoint.col] = parts[smudgePoint.col] === '#' ? '.' : '#';
 
-  return parts.join('');
-});
+    return parts.join('');
+  });
 
 const scoreSmudgedGrid = (grid: Grid) => {
   for (let row = 0; row < grid.length; row += 1) {

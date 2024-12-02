@@ -23,8 +23,8 @@ const getRibbon = (dimensions: Dimensions) => {
 
 const inputToDimensions = (input: string) => input.split('\n').map((line) => line.split('x').map(Number) as Dimensions);
 
-const processPackages = (input: string, fn: (ip: Dimensions) => number) => inputToDimensions(input)
-  .reduce((sum, pkg) => sum + fn(pkg), 0);
+const processPackages = (input: string, fn: (ip: Dimensions) => number) =>
+  inputToDimensions(input).reduce((sum, pkg) => sum + fn(pkg), 0);
 
 export const solution1 = (input: string) => processPackages(input, getWrappingPaper);
 export const solution2 = (input: string) => processPackages(input, getRibbon);

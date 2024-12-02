@@ -2,8 +2,8 @@ import { readFileSync } from 'fs';
 import { reduceSumFn } from '../../../reducers';
 
 type Record = {
-  springs: Spring[],
-  counts: number[],
+  springs: Spring[];
+  counts: number[];
 };
 
 enum Spring {
@@ -25,29 +25,26 @@ const inputData = readFileSync(`${__dirname}/input.txt`).toString();
 
 const springMap = (c: string) => {
   switch (c) {
-    case '.': return Spring.FUNCTIONAL;
-    case '#': return Spring.DAMAGED;
-    case '?': return Spring.UNKNOWN;
-    default: throw new Error(`Unknown spring type ${c}`);
+    case '.':
+      return Spring.FUNCTIONAL;
+    case '#':
+      return Spring.DAMAGED;
+    case '?':
+      return Spring.UNKNOWN;
+    default:
+      throw new Error(`Unknown spring type ${c}`);
   }
 };
 
-export const expandInput = (input: string, expansionFactor: number) => input.split('\n').map((line) => {
-  const [springsRaw, countsRaw] = line.split(' ');
-  const springs = new Array(expansionFactor)
-    .fill(springsRaw)
-    .join(Spring.UNKNOWN)
-    .split('')
-    .map(springMap);
+export const expandInput = (input: string, expansionFactor: number) =>
+  input.split('\n').map((line) => {
+    const [springsRaw, countsRaw] = line.split(' ');
+    const springs = new Array(expansionFactor).fill(springsRaw).join(Spring.UNKNOWN).split('').map(springMap);
 
-  const counts = new Array(expansionFactor)
-    .fill(countsRaw)
-    .join(',')
-    .split(',')
-    .map(Number);
+    const counts = new Array(expansionFactor).fill(countsRaw).join(',').split(',').map(Number);
 
-  return { springs, counts } as Record;
-});
+    return { springs, counts } as Record;
+  });
 
 const recordToCacheLabel = (record: Record) => `${record.springs.toString()}-${record.counts.toString()}`;
 
