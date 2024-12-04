@@ -1,5 +1,8 @@
 export default class Vector {
-  constructor(public x: number, public y: number) { }
+  constructor(
+    public x: number,
+    public y: number,
+  ) {}
 
   public add(a: Vector) {
     return new Vector(this.x + a.x, this.y + a.y);
@@ -21,5 +24,9 @@ export default class Vector {
 
   public eq(other: Vector) {
     return this.x === other.x && this.y === other.y;
+  }
+
+  public scalarMult(scalar: number) {
+    return new Vector(this.x * scalar, this.y * scalar);
   }
 }
