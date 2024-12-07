@@ -18,6 +18,10 @@ export default class Vector {
     return new Vector(+match[1], +match[2]);
   }
 
+  public clone() {
+    return new Vector(this.x, this.y);
+  }
+
   public toString() {
     return `(${this.x},${this.y})`;
   }
