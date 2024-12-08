@@ -8,8 +8,12 @@ export default class Vector {
     return new Vector(this.x + a.x, this.y + a.y);
   }
 
+  public sub(a: Vector) {
+    return new Vector(this.x - a.x, this.y - a.y);
+  }
+
   public static from(input: string, seperator = ',') {
-    const matchReg = new RegExp(`([0-9]+)${seperator}([0-9]+)`);
+    const matchReg = new RegExp(`([-0-9]+)${seperator}([-0-9]+)`);
     const match = matchReg.exec(input);
 
     if (match === null) {
