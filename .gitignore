@@ -1,0 +1,11 @@
+node_modules/
+
+# Personal, per-user AoC puzzle inputs must never be committed (AoC policy).
+# Sample/example inputs (src/**/sample.txt) are intentionally NOT ignored.
+src/**/input.txt
+
+# Your AoC session cookie and any other local secrets.
+.env
+
+*.log
+.DS_Store
