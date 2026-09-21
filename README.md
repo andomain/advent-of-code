@@ -17,6 +17,10 @@ Then fill in `.env` with your AoC session cookie:
 
 This value is a bearer credential for your account — treat it like a password. It's gitignored and should never be committed.
 
+## AI Usage
+
+This repo was scaffolded using Claude for tooling etc. In the spirit of Advent of Code that is the boundary at which AI involvement stops, all solutions/tests etc. are written by me (or you, should you choose to fork this repo and tackle your own challenges)
+
 ## Usage
 
 Scaffold a new day (creates the solution + test files, and fetches/caches your personal input if `.env` is set up and the puzzle has unlocked):

@@ -1,6 +1,7 @@
 # CLAUDE.md
 
 Personal Advent of Code (adventofcode.com) solutions in TypeScript, run on Bun.
+AI agents are only permitted to work on and improve the tooling around this repo. All challenge solutions must be manually solved and written
 
 ## Commands
 
