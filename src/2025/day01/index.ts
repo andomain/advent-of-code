@@ -3,34 +3,34 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
 const INIT_POS = 50;
-const TURN_COUNT = 100
+const TURN_COUNT = 100;
 
-// TODO: Convert to just +/- integers
-export type Instruction = {
-  dir: 'L' | 'R';
-  amount: number;
+export const parseInput = (input: string): Array<number> => {
+  return input
+    .split("\n")
+    .filter(Boolean)
+    .map((row) => {
+      const dir = row[0];
+      const amount = parseInt(row.slice(1), 10);
+
+      return dir === "R" ? amount : -amount;
+    });
 };
 
-export const parseInput = (input: string): Array<Instruction> => {
-  return input.split('\n').filter(Boolean).map(row => ({ dir: row[0] as 'L' | 'R', amount: parseInt(row.slice(1), 10) }))
-}
-
-export const applyTurn = (init: number, turn: Instruction): number => {
-  const leftRight = turn.dir === 'R' ? 1 : -1;
-
-  return (TURN_COUNT + init + leftRight * turn.amount % TURN_COUNT) % TURN_COUNT;
-}
+export const applyTurn = (position: number, turn: number): number => {
+  return (TURN_COUNT + position + (turn % TURN_COUNT)) % TURN_COUNT;
+};
 
 export function part1(input: string): number {
   let position = INIT_POS;
   let result = 0;
-  const instructions = parseInput(input);
+  const turns = parseInput(input);
 
-  for (const instruction of instructions) {
-    position = applyTurn(position, instruction);
+  for (const turn of turns) {
+    position = applyTurn(position, turn);
 
     if (position === 0) {
-      result++
+      result++;
     }
   }
 
@@ -40,18 +40,18 @@ export function part1(input: string): number {
 export function part2(input: string): number {
   let position = INIT_POS;
   let result = 0;
-  const instructions = parseInput(input);
+  const turns = parseInput(input);
 
-  for (const instruction of instructions) {
+  for (const turn of turns) {
     const pre = position;
-    const post = applyTurn(position, instruction);
-    const wholeTurns = Math.floor(instruction.amount / TURN_COUNT);
+    const post = applyTurn(position, turn);
+    const wholeTurns = Math.floor(Math.abs(turn) / TURN_COUNT);
 
     if (post === 0) {
       result++;
-    } else if (pre !== 0 && instruction.dir === 'R' && post < pre) {
+    } else if (pre !== 0 && turn > 0 && post < pre) {
       result += 1;
-    } else if (pre !== 0 && instruction.dir === 'L' && post > pre) {
+    } else if (pre !== 0 && turn < 0 && post > pre) {
       result += 1;
     }
 
