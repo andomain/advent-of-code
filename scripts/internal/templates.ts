@@ -13,8 +13,12 @@ export function part2(_input: string): number {
 
 if (import.meta.main) {
   const input = readFileSync(join(import.meta.dir, "input.txt"), "utf-8");
+  console.time("Part 1");
   console.log("Part 1:", part1(input));
+  console.timeEnd("Part 1");
+  console.time("Part 2");
   console.log("Part 2:", part2(input));
+  console.timeEnd("Part 2");
 }
 `;
 }
