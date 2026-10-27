@@ -1,9 +1,9 @@
 // https://adventofcode.com/2025/day/2
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const parseInput = (input: string) =>
-  input.split(",").map((c) => c.split("-").map(Number) as [number, number]);
+  input.split(',').map((c) => c.split('-').map(Number) as [number, number]);
 
 const chunkArray = <T>(input: T[], size: number): T[][] => {
   const result: T[][] = [];
@@ -22,9 +22,9 @@ const areAllChunksMatching = (val: number, chunkCount: number) => {
   }
 
   const chunks = chunkArray(
-    stringVal.split(""),
+    stringVal.split(''),
     stringVal.length / chunkCount,
-  ).map((chunk) => chunk.join(""));
+  ).map((chunk) => chunk.join(''));
 
   return chunks.slice(1).every((chunk) => chunk === chunks[0]);
 };
@@ -67,11 +67,11 @@ export function part2(input: string): number {
 }
 
 if (import.meta.main) {
-  const input = readFileSync(join(import.meta.dir, "input.txt"), "utf-8");
-  console.time("Part 1");
-  console.log("Part 1:", part1(input));
-  console.timeEnd("Part 1");
-  console.time("Part 2");
-  console.log("Part 2:", part2(input));
-  console.timeEnd("Part 2");
+  const input = readFileSync(join(import.meta.dir, 'input.txt'), 'utf-8');
+  console.time('Part 1');
+  console.log('Part 1:', part1(input));
+  console.timeEnd('Part 1');
+  console.time('Part 2');
+  console.log('Part 2:', part2(input));
+  console.timeEnd('Part 2');
 }

@@ -1,6 +1,6 @@
 // https://adventofcode.com/2025/day/5
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 type Range = { start: number; end: number };
 
@@ -31,13 +31,13 @@ const overlap = (a: Range, b: Range) =>
 
 const parseInput = (input: string) => {
   const [rawRanges, rawIds] = input
-    .split("\n\n")
-    .map((sections) => sections.split("\n"));
+    .split('\n\n')
+    .map((sections) => sections.split('\n'));
 
   // TODO: Rather than creating discrete ranges, for each one see if it overlaps with an existing one and fold into that
   const discreteRanges: Range[] =
     rawRanges?.map((range) => {
-      const [start, end] = range.split("-").map(Number) as [number, number];
+      const [start, end] = range.split('-').map(Number) as [number, number];
       return { start, end };
     }) || [];
 
@@ -73,11 +73,11 @@ export function part2(input: string): number {
 }
 
 if (import.meta.main) {
-  const input = readFileSync(join(import.meta.dir, "input.txt"), "utf-8");
-  console.time("Part 1");
-  console.log("Part 1:", part1(input));
-  console.timeEnd("Part 1");
-  console.time("Part 2");
-  console.log("Part 2:", part2(input));
-  console.timeEnd("Part 2");
+  const input = readFileSync(join(import.meta.dir, 'input.txt'), 'utf-8');
+  console.time('Part 1');
+  console.log('Part 1:', part1(input));
+  console.timeEnd('Part 1');
+  console.time('Part 2');
+  console.log('Part 2:', part2(input));
+  console.timeEnd('Part 2');
 }

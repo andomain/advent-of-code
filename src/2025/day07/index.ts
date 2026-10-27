@@ -1,6 +1,6 @@
 // https://adventofcode.com/2025/day/7
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 // TODO Extract to lib
 class Vector {
@@ -54,10 +54,10 @@ class Grid<T> {
 }
 
 const getStart = (grid: Grid<string>): Vector => {
-  const start = grid.find("S");
+  const start = grid.find('S');
 
   if (!start) {
-    throw new Error("Cannot find start point");
+    throw new Error('Cannot find start point');
   }
 
   return start;
@@ -66,9 +66,9 @@ const getStart = (grid: Grid<string>): Vector => {
 const parseInput = (input: string): Grid<string> =>
   new Grid(
     input
-      .split("\n")
+      .split('\n')
       .filter(Boolean)
-      .map((row) => row.split("")),
+      .map((row) => row.split('')),
   );
 
 type State = {
@@ -82,7 +82,7 @@ const step = (grid: Grid<string>, row: number, currentState: State): State =>
     (nextState, [beamXStr, pathCount]) => {
       const beamX = Number(beamXStr);
       const nextPaths = [];
-      if (grid.get(beamX, row) === "^") {
+      if (grid.get(beamX, row) === '^') {
         nextState.splits++;
         nextPaths.push(beamX - 1, beamX + 1);
       } else {
@@ -127,11 +127,11 @@ export function part2(input: string): number {
 }
 
 if (import.meta.main) {
-  const input = readFileSync(join(import.meta.dir, "input.txt"), "utf-8");
-  console.time("Part 1");
-  console.log("Part 1:", part1(input));
-  console.timeEnd("Part 1");
-  console.time("Part 2");
-  console.log("Part 2:", part2(input));
-  console.timeEnd("Part 2");
+  const input = readFileSync(join(import.meta.dir, 'input.txt'), 'utf-8');
+  console.time('Part 1');
+  console.log('Part 1:', part1(input));
+  console.timeEnd('Part 1');
+  console.time('Part 2');
+  console.log('Part 2:', part2(input));
+  console.timeEnd('Part 2');
 }

@@ -1,19 +1,19 @@
 // https://adventofcode.com/2025/day/1
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const INIT_POS = 50;
 const TURN_COUNT = 100;
 
 export const parseInput = (input: string): Array<number> => {
   return input
-    .split("\n")
+    .split('\n')
     .filter(Boolean)
     .map((row) => {
       const dir = row[0];
       const amount = parseInt(row.slice(1), 10);
 
-      return dir === "R" ? amount : -amount;
+      return dir === 'R' ? amount : -amount;
     });
 };
 
@@ -63,7 +63,7 @@ export function part2(input: string): number {
 }
 
 if (import.meta.main) {
-  const input = readFileSync(join(import.meta.dir, "input.txt"), "utf-8");
-  console.log("Part 1:", part1(input));
-  console.log("Part 2:", part2(input));
+  const input = readFileSync(join(import.meta.dir, 'input.txt'), 'utf-8');
+  console.log('Part 1:', part1(input));
+  console.log('Part 2:', part2(input));
 }

@@ -7,9 +7,9 @@
 //     link, as Eric Wastl has asked automated tools to do.
 //   - We refuse to fetch before a puzzle's unlock time (midnight EST on its
 //     day), rather than hammering the endpoint hoping it's ready.
-import pkg from "../../package.json" with { type: "json" };
+import pkg from '../../package.json' with { type: 'json' };
 
-const AOC_BASE_URL = "https://adventofcode.com";
+const AOC_BASE_URL = 'https://adventofcode.com';
 const USER_AGENT = `${pkg.homepage} by github.com/andomain`;
 
 export class AocClientError extends Error {}
@@ -22,7 +22,7 @@ export function unlocksAt(year: number, day: number): Date {
 function authHeaders(sessionCookie: string): Record<string, string> {
   return {
     Cookie: `session=${sessionCookie}`,
-    "User-Agent": USER_AGENT,
+    'User-Agent': USER_AGENT,
   };
 }
 
@@ -55,5 +55,5 @@ export async function fetchInput(
   }
 
   const text = await res.text();
-  return text.trimEnd() + "\n";
+  return text.trimEnd() + '\n';
 }

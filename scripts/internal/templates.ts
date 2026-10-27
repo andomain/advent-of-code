@@ -24,7 +24,7 @@ if (import.meta.main) {
 }
 
 export function testTemplate(year: number, day: number): string {
-  const padded = String(day).padStart(2, "0");
+  const padded = String(day).padStart(2, '0');
   return `import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";

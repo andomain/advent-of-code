@@ -1,8 +1,8 @@
 // https://adventofcode.com/2025/day/6
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
-type Operator = "*" | "+";
+type Operator = '*' | '+';
 
 type Problem = {
   operator: Operator;
@@ -10,7 +10,7 @@ type Problem = {
 };
 
 const solveProblem = (problem: Problem) => {
-  const isMult = problem.operator === "*";
+  const isMult = problem.operator === '*';
   const init = isMult ? 1 : 0;
 
   return problem.values.reduce((result, val) => {
@@ -24,7 +24,7 @@ const solveProblem = (problem: Problem) => {
 
 const transpose = <T>(input: T[][]): T[][] => {
   if (!input.length || !input[0]?.length) {
-    throw new Error("Cannot transpose empty array");
+    throw new Error('Cannot transpose empty array');
   }
 
   return input[0].map((_, colIdx) => input.map((row) => row[colIdx] as T));
@@ -57,7 +57,7 @@ export const buildProblemMeta = (operatorInput: string) =>
 export function part1(input: string): number {
   const rawProblems = transpose(
     input
-      .split("\n")
+      .split('\n')
       .filter(Boolean)
       .map((row) => row.trim().split(/\s+/)),
   );
@@ -71,9 +71,9 @@ export function part1(input: string): number {
 }
 
 export function part2(input: string): number {
-  const rawRows = input.split("\n").filter(Boolean);
+  const rawRows = input.split('\n').filter(Boolean);
   const problemMeta = buildProblemMeta(rawRows.slice(-1)[0]!);
-  const rawInputRows = rawRows.slice(0, -1).map((row) => row.split(""));
+  const rawInputRows = rawRows.slice(0, -1).map((row) => row.split(''));
 
   const problems = problemMeta.map<Problem>((meta) => {
     const values = rawInputRows.map((row) =>
@@ -84,8 +84,8 @@ export function part2(input: string): number {
       operator: meta.operator,
       values: transpose(values).reduce<number[]>((lookup, row) => {
         //Filter out any completely empty values (i.e. whitespace padded columns)
-        if (row.some((val) => val !== " ")) {
-          lookup.push(Number(row.join("")));
+        if (row.some((val) => val !== ' ')) {
+          lookup.push(Number(row.join('')));
         }
         return lookup;
       }, []),
@@ -96,11 +96,11 @@ export function part2(input: string): number {
 }
 
 if (import.meta.main) {
-  const input = readFileSync(join(import.meta.dir, "input.txt"), "utf-8");
-  console.time("Part 1");
-  console.log("Part 1:", part1(input));
-  console.timeEnd("Part 1");
-  console.time("Part 2");
-  console.log("Part 2:", part2(input));
-  console.timeEnd("Part 2");
+  const input = readFileSync(join(import.meta.dir, 'input.txt'), 'utf-8');
+  console.time('Part 1');
+  console.log('Part 1:', part1(input));
+  console.timeEnd('Part 1');
+  console.time('Part 2');
+  console.log('Part 2:', part2(input));
+  console.timeEnd('Part 2');
 }
